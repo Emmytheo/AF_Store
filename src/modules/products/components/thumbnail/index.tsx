@@ -46,6 +46,7 @@ const ImageOrPlaceholder = ({
       style={{
         objectFit: "cover",
         objectPosition: "center",
+        borderRadius: "9px"
       }}
     />
   ) : (

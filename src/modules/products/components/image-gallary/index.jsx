@@ -1,15 +1,19 @@
-import { Image as MedusaImage } from "@medusajs/medusa"
+"use client"
+
+// import { Image as MedusaImage } from "@medusajs/medusa"
 import Image from "next/image"
 import { useRef } from "react"
+import { Splide, SplideSlide } from "splide-nextjs/react-splide"
+import "splide-nextjs/splide/dist/css/themes/splide-default.min.css"
 
-type ImageGalleryProps = {
-  images: MedusaImage[]
-}
+// type ImageGalleryProps = {
+//   images: MedusaImage[]
+// }
 
-const ImageGallery = ({ images }: ImageGalleryProps) => {
-  const imageRefs = useRef<(HTMLDivElement | null)[]>([])
+const ImageGallery = ({ images }) => {
+  const imageRefs = useRef([])
 
-  const handleScrollTo = (id: string) => {
+  const handleScrollTo = (id) => {
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({
@@ -47,9 +51,15 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
           )
         })}
       </div>
+
+      {/* <Splide
+        options={{ rewind: true, arrows: false }}
+        aria-label="Image gallery Section"
+      > */}
       <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
         {images.map((image, index) => {
           return (
+            // <SplideSlide key={index}>
             <div
               ref={(image) => imageRefs.current.push(image)}
               key={image.id}
@@ -68,9 +78,11 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 }}
               />
             </div>
+            // </SplideSlide>
           )
         })}
       </div>
+      {/* </Splide> */}
     </div>
   )
 }

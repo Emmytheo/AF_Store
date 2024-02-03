@@ -35,7 +35,7 @@ const CartDropdown = () => {
         >
           <Popover.Panel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[382px] text-gray-900"
+            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[400px] text-gray-900 rounded px-2"
           >
             <div className="p-4 flex items-center justify-center">
               <h3 className="text-large-semi">Shopping Bag</h3>
@@ -109,7 +109,7 @@ const CartDropdown = () => {
                     </span>
                   </div>
                   <Link href="/cart" passHref>
-                    <Button>Go to bag</Button>
+                    <Button className="rounded-md" style={{background: 'rgb(33, 43, 54);'}} >Go to bag</Button>
                   </Link>
                 </div>
               </>
@@ -124,7 +124,7 @@ const CartDropdown = () => {
                     <Link href="/store">
                       <>
                         <span className="sr-only">Go to all products page</span>
-                        <Button onClick={close}>Explore products</Button>
+                        <Button onClick={close} className="rounded-md" style={{background: 'rgb(33, 43, 54);'}} >Explore products</Button>
                       </>
                     </Link>
                   </div>

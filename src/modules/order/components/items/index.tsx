@@ -16,12 +16,12 @@ const Items = ({ items, region, cartId }: ItemsProps) => {
   const enrichedItems = useEnrichedLineItems(items, cartId)
 
   return (
-    <div className="p-10 border-b border-gray-200 gap-y-4 flex flex-col">
+    <div className="py-10 px-5 xs:px-3 sm:px-4 md:px-5 border-b border-gray-200 gap-y-4 flex flex-col">
       {enrichedItems?.length
         ? enrichedItems.map((item) => {
             return (
-              <div className="grid grid-cols-[122px_1fr] gap-x-4" key={item.id}>
-                <div className="w-[122px]">
+              <div className="grid grid-cols-[100px_1fr] gap-x-4" key={item.id}>
+                <div className="w-[100px]">
                   <Thumbnail thumbnail={item.thumbnail} size="full" />
                 </div>
                 <div className="flex flex-col justify-between flex-1">

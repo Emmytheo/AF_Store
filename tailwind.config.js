@@ -14,6 +14,9 @@ module.exports = {
       maxWidth: {
         "8xl": "100rem",
       },
+      boxShadow: {
+        'card': 'rgba(0, 0, 0, 0.06) 0px 2px 10px',
+      },
       screens: {
         "2xsmall": "320px",
         "xsmall": "512px",
@@ -37,5 +40,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // require('flowbite/plugin')
+  ],
 }

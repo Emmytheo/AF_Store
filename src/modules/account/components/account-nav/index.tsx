@@ -9,7 +9,7 @@ const AccountNav = () => {
   const { handleLogout } = useAccount()
 
   return (
-    <div>
+    <div className="px-3">
       <div className="small:hidden">
         {route !== "/account" && (
           <Link

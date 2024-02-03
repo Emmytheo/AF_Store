@@ -12,6 +12,12 @@ type LayoutCollection = {
   title: string
 }
 
+// Define type for props
+type LimitProp = {
+  limit: number;
+}
+
+
 const fetchCollectionData = async (): Promise<LayoutCollection[]> => {
   let collections: ProductCollection[] = []
   let offset = 0
@@ -48,20 +54,20 @@ export const useNavigationCollections = () => {
 }
 
 const fetchFeaturedProducts = async (
-  cartId: string,
-  region: Region
+cartId: string, region: Region, limit: number | undefined,
+
 ): Promise<ProductPreviewType[]> => {
   const products: PricedProduct[] = await getProductsList({
-    pageParam: 4,
+    pageParam: 0,
     queryParams: {
-      limit: 4,
+      limit: limit ? (limit) : (8),
       cart_id: cartId,
       region_id: region.id,
     },
   })
     .then((res) => res.response)
     .then(({ products }) => {
-      console.log(products)
+      console.log(products, limit)
       return products
     })
     .catch((_) => [] as PricedProduct[])
@@ -69,7 +75,7 @@ const fetchFeaturedProducts = async (
   return products
     .filter((p) => !!p.variants)
     .map((p) => {
-      console.log(p)
+      // console.log(p)
       const variants = p.variants as unknown as CalculatedVariant[]
 
       const cheapestVariant = variants.reduce((acc, curr) => {
@@ -112,12 +118,12 @@ const fetchFeaturedProducts = async (
     })
 }
 
-export const useFeaturedProductsQuery = () => {
+export const useFeaturedProductsQuery = (props: LimitProp | undefined) => {
   const { cart } = useCart()
-
+  const _LimitProp = props;
   const queryResults = useQuery(
-    ["layout_featured_products", cart?.id, cart?.region],
-    () => fetchFeaturedProducts(cart?.id!, cart?.region!),
+    ["layout_featured_products", cart?.id, cart?.region, _LimitProp?.limit],
+    () => fetchFeaturedProducts(cart?.id!, cart?.region!, _LimitProp?.limit),
     {
       enabled: !!cart?.id && !!cart?.region,
       staleTime: Infinity,

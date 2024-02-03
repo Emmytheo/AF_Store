@@ -1,4 +1,5 @@
 import FeaturedProducts from "@modules/home/components/featured-products"
+import FeaturedRegions from "@modules/home/components/featured-regions"
 import Hero from "@modules/home/components/hero"
 import { Metadata } from "next"
 
@@ -11,6 +12,9 @@ export const metadata: Metadata = {
 const Home = () => {
   return (
     <>
+      <Hero />
+      <FeaturedRegions />
+      <FeaturedProducts />
       <Hero />
       <FeaturedProducts />
     </>
