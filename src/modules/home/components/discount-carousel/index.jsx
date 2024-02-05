@@ -7,9 +7,11 @@ import SkeletonProductPreview from "@modules/skeletons/components/skeleton-produ
 
 import { getProductsList } from "@lib/data"
 import { useEffect, useState } from "react"
+import Thumbnail from "../../../products/components/thumbnail"
 
-const FeaturedProducts = (props) => {
-  const { data } = useFeaturedProductsQuery({ limit: 8 })
+const DiscountCarousel = (props) => {
+  const { title } = props
+  const { data } = useFeaturedProductsQuery({ limit: 4 })
   const [products, setProducts] = useState([])
 
   const filterType = (category) => {
@@ -26,15 +28,15 @@ const FeaturedProducts = (props) => {
   //filter Object
   const filters = [
     {
-      title: "",
+      title: "Weekly Popular Products from Alaba Int’l",
       slug: "",
-      fields: [
-        { id: "All", name: "All" },
-        { id: "Shirts", name: "Shirts" },
-        { id: "SweatShirts", name: "SweatShirts" },
-        { id: "Trousers", name: "Trousers" },
-        { id: "Hoodies", name: "Hoodies" },
-      ],
+      // fields: [
+      //   { id: "All", name: "All" },
+      //   { id: "Shirts", name: "Shirts" },
+      //   { id: "SweatShirts", name: "SweatShirts" },
+      //   { id: "Trousers", name: "Trousers" },
+      //   { id: "Hoodies", name: "Hoodies" },
+      // ],
     },
   ]
 
@@ -49,16 +51,16 @@ const FeaturedProducts = (props) => {
   }, [data])
 
   return (
-    <div className="py-12">
-      <div className="content-container py-12">
-        <div className="flex flex-col items-center text-center mb-8">
+    <div className="py-6">
+      <div className="content-container py-2">
+        {/* <div className="flex flex-col items-center text-center mb-8">
           <span className="text-base-regular text-gray-600 mb-4">
             Latest products
           </span>
           <p className="text-2xl-regular text-gray-900 max-w-lg mb-2">
             Our newest styles are here to help you look your best.
           </p>
-        </div>
+        </div> */}
 
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Fliter Type */}
@@ -67,7 +69,7 @@ const FeaturedProducts = (props) => {
                 return (
                   <div>
                     <p className="font-bold text-gray-700 mb-3">
-                      {filter.title}
+                      {title ? title : filter.title}
                     </p>
                     <div className="inline-flex justfiy-around flex-nowrap mb-4 min-w-80 overflow-x-auto max-w-full">
                       {filter && filter.fields && filter.fields.length > 0
@@ -105,26 +107,64 @@ const FeaturedProducts = (props) => {
               })
             : null}
         </div>
-
-        <ul className="grid grid-cols-2 small:grid-cols-4 gap-x-4 gap-y-8">
-          {products
-            ? products.map((product) => (
-                <li key={product.id}>
-                  <ProductPreview {...product} />
-                </li>
-              ))
+        <div className="inline-flex gap-x-4 flex-auto justfiy-around flex-nowrap mb-4 min-w-80 overflow-x-auto max-w-full">
+          {products && products.length > 0
+            ? products.map((product) => {
+                return (
+                  <div className="min-w-[240px] sm:min-w-[240px] md:min-w-[260px] lg:min-w-[250px] xl:min-w-[250px] m-2">
+                    <div class="max-w-sm bg-white rounded-lg shadow-card my-2">
+                      <div class="p-5">
+                        <a href="#">
+                          <h1 class="mb-2 text-5xl font-regular tracking-tight text-gray-900">
+                            120
+                          </h1>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                          Enjoy amazing discount for every purchase you make
+                        </p>
+                        {/* <a
+                          href="#"
+                          class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        >
+                          Read more
+                          <svg
+                            class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 14 10"
+                          >
+                            <path
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M1 5h12m0 0L9 1m4 4L9 9"
+                            />
+                          </svg>
+                        </a> */}
+                      </div>
+                      <Thumbnail thumbnail={product.thumbnail} size="full" />
+                    </div>
+                  </div>
+                )
+              })
             : Array.from(Array(8).keys()).map((i) => (
-                <li key={i}>
+                <div
+                  key={i}
+                  className="min-w-[150px] sm:min-w-[160px] md:min-w-[180px] lg:min-w-[200px] xl:min-w-[250px]"
+                >
                   <SkeletonProductPreview />
-                </li>
+                </div>
               ))}
-        </ul>
+        </div>
+
         <div className="w-full mt-4 relative flex justify-end items-center">
-          <UnderlineLink href="/store">Explore products</UnderlineLink>
+          <UnderlineLink href="/store">See More</UnderlineLink>
         </div>
       </div>
     </div>
   )
 }
 
-export default FeaturedProducts
+export default DiscountCarousel

@@ -8,7 +8,8 @@ import SkeletonProductPreview from "@modules/skeletons/components/skeleton-produ
 import { getProductsList } from "@lib/data"
 import { useEffect, useState } from "react"
 
-const FeaturedProducts = (props) => {
+const ProductCarousel = (props) => {
+  const {title} = props;
   const { data } = useFeaturedProductsQuery({ limit: 8 })
   const [products, setProducts] = useState([])
 
@@ -26,15 +27,15 @@ const FeaturedProducts = (props) => {
   //filter Object
   const filters = [
     {
-      title: "",
+      title: "Weekly Popular Products from Alaba Int’l",
       slug: "",
-      fields: [
-        { id: "All", name: "All" },
-        { id: "Shirts", name: "Shirts" },
-        { id: "SweatShirts", name: "SweatShirts" },
-        { id: "Trousers", name: "Trousers" },
-        { id: "Hoodies", name: "Hoodies" },
-      ],
+      // fields: [
+      //   { id: "All", name: "All" },
+      //   { id: "Shirts", name: "Shirts" },
+      //   { id: "SweatShirts", name: "SweatShirts" },
+      //   { id: "Trousers", name: "Trousers" },
+      //   { id: "Hoodies", name: "Hoodies" },
+      // ],
     },
   ]
 
@@ -49,16 +50,16 @@ const FeaturedProducts = (props) => {
   }, [data])
 
   return (
-    <div className="py-12">
-      <div className="content-container py-12">
-        <div className="flex flex-col items-center text-center mb-8">
+    <div className="py-6">
+      <div className="content-container py-2">
+        {/* <div className="flex flex-col items-center text-center mb-8">
           <span className="text-base-regular text-gray-600 mb-4">
             Latest products
           </span>
           <p className="text-2xl-regular text-gray-900 max-w-lg mb-2">
             Our newest styles are here to help you look your best.
           </p>
-        </div>
+        </div> */}
 
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Fliter Type */}
@@ -67,7 +68,7 @@ const FeaturedProducts = (props) => {
                 return (
                   <div>
                     <p className="font-bold text-gray-700 mb-3">
-                      {filter.title}
+                      {title ? title : filter.title}
                     </p>
                     <div className="inline-flex justfiy-around flex-nowrap mb-4 min-w-80 overflow-x-auto max-w-full">
                       {filter && filter.fields && filter.fields.length > 0
@@ -105,26 +106,31 @@ const FeaturedProducts = (props) => {
               })
             : null}
         </div>
-
-        <ul className="grid grid-cols-2 small:grid-cols-4 gap-x-4 gap-y-8">
-          {products
-            ? products.map((product) => (
-                <li key={product.id}>
-                  <ProductPreview {...product} />
-                </li>
-              ))
+        <div className="inline-flex gap-x-4 flex-auto justfiy-around flex-nowrap mb-4 min-w-80 overflow-x-auto max-w-full">
+          {products && products.length > 0
+            ? products.map((product) => {
+                return (
+                  <div className="min-w-[180px] sm:min-w-[180px] md:min-w-[200px] lg:min-w-[250px] xl:min-w-[300px]">
+                    <ProductPreview {...product} />
+                  </div>
+                )
+              })
             : Array.from(Array(8).keys()).map((i) => (
-                <li key={i}>
+                <div
+                  key={i}
+                  className="min-w-[150px] sm:min-w-[160px] md:min-w-[180px] lg:min-w-[200px] xl:min-w-[250px]"
+                >
                   <SkeletonProductPreview />
-                </li>
+                </div>
               ))}
-        </ul>
+        </div>
+        
         <div className="w-full mt-4 relative flex justify-end items-center">
-          <UnderlineLink href="/store">Explore products</UnderlineLink>
+          <UnderlineLink href="/store">See More</UnderlineLink>
         </div>
       </div>
     </div>
   )
 }
 
-export default FeaturedProducts
+export default ProductCarousel

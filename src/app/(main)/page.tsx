@@ -1,5 +1,7 @@
 import FeaturedProducts from "@modules/home/components/featured-products"
 import FeaturedRegions from "@modules/home/components/featured-regions"
+import ProductCarousel from "@modules/home/components/product-carousel"
+import DiscountCarousel from "@modules/home/components/discount-carousel"
 import Hero from "@modules/home/components/hero"
 import { Metadata } from "next"
 
@@ -14,7 +16,9 @@ const Home = () => {
     <>
       <Hero />
       <FeaturedRegions />
-      <FeaturedProducts />
+      <ProductCarousel title={'Weekly Popular Products from Alaba Int’l'} />
+      <ProductCarousel title={'Hot Deals from Alaba Int’l'} />
+      <DiscountCarousel title={'Get Up To 70% Off'} />
       <Hero />
       <FeaturedProducts />
     </>
