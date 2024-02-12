@@ -9,7 +9,7 @@ import { getProductsList } from "@lib/data"
 import { useEffect, useState } from "react"
 
 const ProductCarousel = (props) => {
-  const {title} = props;
+  const { title } = props
   const { data } = useFeaturedProductsQuery({ limit: 8 })
   const [products, setProducts] = useState([])
 
@@ -64,18 +64,19 @@ const ProductCarousel = (props) => {
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Fliter Type */}
           {filters
-            ? filters.map((filter) => {
+            ? filters.map((filter, i) => {
                 return (
-                  <div>
+                  <div key={i}>
                     <p className="font-bold text-gray-700 mb-3">
                       {title ? title : filter.title}
                     </p>
                     <div className="inline-flex justfiy-around flex-nowrap mb-4 min-w-80 overflow-x-auto max-w-full">
                       {filter && filter.fields && filter.fields.length > 0
-                        ? filter.fields.map((filterField) => {
+                        ? filter.fields.map((filterField, i) => {
                             if (filterField.name === "All") {
                               return (
                                 <button
+                                  key={i}
                                   onClick={() => setProducts(data)}
                                   className="m-1 mx-2 px-4 py-1 rounded-xl text-black font-medium bg-white text-sm hover:bg-[#52475D] hover:text-white"
                                   style={{
@@ -88,6 +89,7 @@ const ProductCarousel = (props) => {
                             } else {
                               return (
                                 <button
+                                  key={i}
                                   onClick={() => filterType(filterField.id)}
                                   className="m-1 mx-2 px-4 py-1 rounded-xl text-black font-medium bg-white text-sm hover:bg-[#52475D] hover:text-white"
                                   style={{
@@ -108,9 +110,12 @@ const ProductCarousel = (props) => {
         </div>
         <div className="inline-flex gap-x-4 flex-auto justfiy-around flex-nowrap mb-4 min-w-80 overflow-x-auto max-w-full">
           {products && products.length > 0
-            ? products.map((product) => {
+            ? products.map((product, i) => {
                 return (
-                  <div className="min-w-[180px] sm:min-w-[180px] md:min-w-[200px] lg:min-w-[250px] xl:min-w-[300px]">
+                  <div
+                    key={i}
+                    className="min-w-[200px] sm:min-w-[200px] md:min-w-[200px] lg:min-w-[250px] xl:min-w-[300px]"
+                  >
                     <ProductPreview {...product} />
                   </div>
                 )
@@ -124,7 +129,7 @@ const ProductCarousel = (props) => {
                 </div>
               ))}
         </div>
-        
+
         <div className="w-full mt-4 relative flex justify-end items-center">
           <UnderlineLink href="/store">See More</UnderlineLink>
         </div>

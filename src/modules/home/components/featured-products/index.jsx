@@ -63,18 +63,19 @@ const FeaturedProducts = (props) => {
         <div className="flex flex-col lg:flex-row justify-between">
           {/* Fliter Type */}
           {filters
-            ? filters.map((filter) => {
+            ? filters.map((filter, i) => {
                 return (
-                  <div>
+                  <div key={i}>
                     <p className="font-bold text-gray-700 mb-3">
                       {filter.title}
                     </p>
                     <div className="inline-flex justfiy-around flex-nowrap mb-4 min-w-80 overflow-x-auto max-w-full">
                       {filter && filter.fields && filter.fields.length > 0
-                        ? filter.fields.map((filterField) => {
+                        ? filter.fields.map((filterField, i) => {
                             if (filterField.name === "All") {
                               return (
                                 <button
+                                  key={i}
                                   onClick={() => setProducts(data)}
                                   className="m-1 mx-2 px-4 py-1 rounded-xl text-black font-medium bg-white text-sm hover:bg-[#52475D] hover:text-white"
                                   style={{
@@ -87,6 +88,7 @@ const FeaturedProducts = (props) => {
                             } else {
                               return (
                                 <button
+                                  key={i}
                                   onClick={() => filterType(filterField.id)}
                                   className="m-1 mx-2 px-4 py-1 rounded-xl text-black font-medium bg-white text-sm hover:bg-[#52475D] hover:text-white"
                                   style={{

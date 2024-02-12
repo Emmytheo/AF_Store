@@ -10,10 +10,11 @@ import { useEffect, useState } from "react"
 import Thumbnail from "../../../products/components/thumbnail"
 import { Splide, SplideSlide } from "splide-nextjs/react-splide"
 import "splide-nextjs/splide/dist/css/themes/splide-default.min.css"
+import Image from "next/image"
 
-const DiscountCarousel = (props) => {
+const BrandsCarousel = (props) => {
   const { title } = props
-  const { data } = useFeaturedProductsQuery({ limit: 5 })
+  const { data } = useFeaturedProductsQuery({ limit: 2 })
   const [products, setProducts] = useState([])
 
   const filterType = (category) => {
@@ -45,24 +46,13 @@ const DiscountCarousel = (props) => {
   //Discount Object
   const discounts = [
     {
-      price: "20",
-      bg_color: "#5C5F6E",
+      title: "Frequently Asked Questions",
     },
     {
-      price: "120",
-      bg_color: "#FF7583",
+      title: "Online Payment Process",
     },
     {
-      price: "69",
-      bg_color: "#D9A08A",
-    },
-    {
-      price: "85",
-      bg_color: "#5C5F6E",
-    },
-    {
-      price: "10",
-      bg_color: "#E09A55",
+      title: "Home Delivery Options",
     },
   ]
 
@@ -143,47 +133,57 @@ const DiscountCarousel = (props) => {
           options={{
             rewind: true,
             arrows: false,
-            perPage: 5,
+            perPage: 2,
+            mediaQuery: "min",
             breakpoints: {
-              560: {
+              580: {
                 perPage: 1,
               },
-              768: {
-                perPage: 2,
-              },
-              960: {
-                perPage: 3,
-              },
-              1280: {
-                perPage: 4,
-              },
-              1440: {
-                perPage: 5,
-              },
+              // 1280: {
+              //   perPage: 2,
+              // },
             },
           }}
-          aria-label="Discount Section"
+          aria-label="Brands Section"
           className="inline-flex gap-x-4 flex-auto justfiy-around flex-nowrap mb-4 min-w-80 w-full"
         >
           {products && products.length > 0 ? (
             products.map((product, i) => {
               return (
                 <SplideSlide key={i}>
-                  <div className="min-w-[240px] sm:min-w-[240px] md:min-w-[230px] lg:min-w-[230px] xl:min-w-[230px] m-2">
+                  <div className="min-w-[250px] sm:min-w-[300px] md:min-w-[400px] lg:min-w-[500px] xl:min-w-[650px] m-2">
                     <div
-                      class="max-w-sm rounded-lg shadow-card my-2"
-                      style={{ background: discounts[i].bg_color }}
+                      className="max-w-sm w-full rounded-lg shadow-card my-2"
+                      style={{ background: "#F3F3F3" }}
                     >
-                      <div class="p-5">
-                        <p class="mb-3 text-white font-normal ">Save</p>
+                      <Image
+                        src={`/stores${i + 1}.png`}
+                        alt="Thumbnail"
+                        className="absolute inset-0"
+                        draggable={false}
+                        width={600}
+                        height={500}
+                        priority={true}
+                        quality={90}
+                        // fill
+                        sizes="100vw"
+                        style={{
+                          objectFit: "cover",
+                          objectPosition: "center",
+                          borderRadius: "9px",
+                        }}
+                      />
+
+                      <div class="p-8">
+                        {/* <p class="mb-3 text-white font-normal ">Save</p> */}
                         <span className="inline-flex">
-                          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+                          {/* <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
                             $
-                          </p>
+                          </p> */}
                           <a href="#">
-                            <h1 class="mb-2 text-5xl font-regular tracking-tight text-gray-800">
-                              {product.price ? (
-                                <>{discounts[i].price}</>
+                            <h1 class="mb-2 text-2xl font-semibold tracking-tight text-gray-800">
+                              {product.title ? (
+                                <>{discounts[i].title}</>
                               ) : (
                                 <div className="w-20 h-6 animate-pulse bg-gray-100"></div>
                               )}
@@ -191,8 +191,8 @@ const DiscountCarousel = (props) => {
                           </a>
                         </span>
 
-                        <p class="mb-3 text-white text-sm font-normal ">
-                          Enjoy amazing discount for every purchase you make
+                        <p class="mb-3 text-gray-700 text-md font-normal ">
+                          Updates on safe shopping in our stores
                         </p>
                         {/* <a
                           href="#"
@@ -216,7 +216,6 @@ const DiscountCarousel = (props) => {
                           </svg>
                         </a> */}
                       </div>
-                      <Thumbnail thumbnail={`/discounts${i+1}.png`} size="full" />
                     </div>
                   </div>
                 </SplideSlide>
@@ -245,4 +244,4 @@ const DiscountCarousel = (props) => {
   )
 }
 
-export default DiscountCarousel
+export default BrandsCarousel
