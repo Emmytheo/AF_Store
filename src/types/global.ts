@@ -49,7 +49,7 @@ export type AppPropsWithLayout<P = {}, IP = P> = AppProps<P> & {
 }
 
 export type ProductPreviewType = {
-  category: any
+  category?: any
   id: string
   title: string
   handle: string | null

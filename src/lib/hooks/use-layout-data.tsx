@@ -86,7 +86,6 @@ cartId: string, region: Region, limit: number | undefined,
       }, variants[0])
 
       return {
-        category: p.categories!,
         id: p.id!,
         title: p.title!,
         handle: p.handle!,
