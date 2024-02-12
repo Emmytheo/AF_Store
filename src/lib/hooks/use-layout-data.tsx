@@ -118,7 +118,7 @@ cartId: string, region: Region, limit: number | undefined,
     })
 }
 
-export const useFeaturedProductsQuery = (props: LimitProp | undefined) => {
+export const useFeaturedProductsQuery = (props?: LimitProp | undefined) => {
   const { cart } = useCart()
   const _LimitProp = props;
   const queryResults = useQuery(
