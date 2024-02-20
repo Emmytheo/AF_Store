@@ -22,7 +22,7 @@ const Home = () => {
       <ProductCarousel title={'Hot Deals from Alaba Int’l'} />
       <DiscountCarousel title={'Get Up To 70% Off'} />
       <ServicesCarousel title={'Services To Help You Shop'} />
-      {/* <BrandsCarousel title={'Trending Product For You!'} /> */}
+      <BrandsCarousel title={'Trending Product For You!'} />
       <Hero />
       <FeaturedProducts />
     </>
